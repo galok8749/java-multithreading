@@ -9,6 +9,9 @@ public class Main {
                 .newFixedThreadPool(10);
 
         for (int i = 1; i <= 100; i++) {
+            if(i == 80) {
+                System.out.println("STOP");
+            }
             NumberPrinter numberPrinter = new NumberPrinter(i);
             executorService.execute(numberPrinter);
         }
