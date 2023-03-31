@@ -12,14 +12,15 @@ public class Main {
 
         ExecutorService executorService = Executors.newCachedThreadPool();
 
-        Lock lockForValue = new ReentrantLock();
+        Lock lockForValue1 = new ReentrantLock();
+        Lock lockForValue2 = new ReentrantLock();
 
-        executorService.execute(new Adder(value, lockForValue));
-        executorService.execute(new Subtractor(value, lockForValue));
+        executorService.execute(new Adder(value, lockForValue1, lockForValue2));
+        executorService.execute(new Subtractor(value, lockForValue1, lockForValue2));
 
         executorService.shutdown();
         executorService.awaitTermination(1L, TimeUnit.MINUTES);
 
-        System.out.println(value.get());
+        System.out.println(value.get1());
     }
 }

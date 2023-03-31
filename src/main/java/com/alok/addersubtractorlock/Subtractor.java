@@ -4,10 +4,12 @@ import java.util.concurrent.locks.Lock;
 
 public class Subtractor implements Runnable {
     Value value;
-    Lock lockForValue;
-    public Subtractor(Value value, Lock lockForValue) {
+    Lock lockForValue1;
+    Lock lockForValue2;
+    public Subtractor(Value value, Lock lockForValue1, Lock lockForValue2) {
         this.value = value;
-        this.lockForValue = lockForValue;
+        this.lockForValue1 = lockForValue1;
+        this.lockForValue2 = lockForValue2;
     }
     @Override
     public void run() {
@@ -18,11 +20,11 @@ public class Subtractor implements Runnable {
                 System.out.println("Something went wrong");
             }
             // get the lock
-            lockForValue.lock();
-            int current = value.get();
+            lockForValue1.lock();
+            int current = value.get1();
             int next = current - i;
-            value.set(next);
-            lockForValue.unlock();
+            value.set1(next);
+            lockForValue1.unlock();
         }
     }
 }
